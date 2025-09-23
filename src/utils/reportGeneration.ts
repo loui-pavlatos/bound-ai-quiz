@@ -281,9 +281,9 @@ export const getProductRecommendations = (answers: QuizAnswer[], automationScore
   //Respondant document quality/operational challenges
   const processesAnswerQuality = answers.find(a => a.questionId === '5');
   const processesAnswerSlow = answers.find(a => a.questionId === '8');
-  if (!processesAnswerQuality.answer.includes('Standardized and high quality')
+  if ((!processesAnswerQuality.answer.includes('Standardized and high quality')
     || processesAnswerSlow.answer.includes('Skilled staff such as underwriters are spending too much time on clerical tasks')
-    || processesAnswerSlow.answer.includes('High error rates from manual data entry')
+    || processesAnswerSlow.answer.includes('High error rates from manual data entry'))
     && automationScore >= 70) {
     recommendations.push('Bound AI RiskClear Digital Worker - AI agent purpose-built to clean, validate, and structure data across submissions.',);
   }
