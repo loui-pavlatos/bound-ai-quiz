@@ -13,6 +13,14 @@ const QuizPage = () => {
   const currentQuestion = quizQuestions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
   const isLastQuestion = currentQuestionIndex === quizQuestions.length - 1;
+  const [history, setHistory] = useState<number[]>([]); // To track navigation history
+
+  const goToQuestion = (index: number) => {
+    setHistory(prev => [...prev, currentQuestionIndex]);
+    setCurrentQuestionIndex(index);
+    const answer = answers.find(a => a.questionId === quizQuestions[index].id);
+    setCurrentAnswer(answer?.answer || '');
+  };
 
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
@@ -24,7 +32,7 @@ const QuizPage = () => {
   const handleAnswerChange = (value: string | string[]) => {
     setCurrentAnswer(value);
   };
-
+  
   const handleNext = () => {
     const newAnswer: QuizAnswer = {
       questionId: currentQuestion.id,
@@ -46,15 +54,27 @@ const QuizPage = () => {
       localStorage.setItem('quizAnswers', JSON.stringify(updatedAnswers));
       navigate('/loading');
     } else {
-      setCurrentQuestionIndex(prev => prev + 1);
+      if (
+        currentAnswer === 'MGA' ||
+        currentAnswer === 'Carrier' ||
+        currentAnswer === 'Agent/Broker' ||
+        currentAnswer === 'Technology Provider' ||
+        currentAnswer === 'No'
+      ) {
+        goToQuestion(currentQuestionIndex + 2);
+      } else {
+        goToQuestion(currentQuestionIndex + 1);
+      }
       setCurrentAnswer('');
     }
   };
 
   const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
-      const previousAnswer = answers.find(a => a.questionId === quizQuestions[currentQuestionIndex - 1].id);
+    if (history.length > 0) {
+      const prevIndex = history[history.length - 1];
+      setHistory(history.slice(0, -1)); // Remove last index
+      setCurrentQuestionIndex(prevIndex);
+      const previousAnswer = answers.find(a => a.questionId === quizQuestions[prevIndex].id);
       setCurrentAnswer(previousAnswer?.answer || '');
     }
   };
@@ -78,9 +98,14 @@ const QuizPage = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleAnswerChange(option)}
+                style={
+                  currentAnswer === option
+                    ? { borderColor: '#35b4dd', background: '#e6f8fc', color: '#35b4dd' }
+                    : {}
+                }
                 className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
                   currentAnswer === option
-                    ? 'border-brand-blue bg-blue-50 text-brand-blue'
+                    ? ''
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
@@ -101,25 +126,31 @@ const QuizPage = () => {
                 onClick={() => {
                   const currentAnswerArray = Array.isArray(currentAnswer) ? currentAnswer : [];
                   const isSelected = currentAnswerArray.includes(option);
-                  
                   if (isSelected) {
                     handleAnswerChange(currentAnswerArray.filter(item => item !== option));
                   } else {
                     handleAnswerChange([...currentAnswerArray, option]);
                   }
                 }}
+                style={
+                  Array.isArray(currentAnswer) && currentAnswer.includes(option)
+                    ? { borderColor: '#35b4dd', background: '#e6f8fc', color: '#35b4dd' }
+                    : {}
+                }
                 className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
                   Array.isArray(currentAnswer) && currentAnswer.includes(option)
-                    ? 'border-brand-blue bg-blue-50 text-brand-blue'
+                    ? ''
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
                 <div className="flex items-center">
-                  <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center ${
-                    Array.isArray(currentAnswer) && currentAnswer.includes(option)
-                      ? 'border-brand-blue bg-brand-blue'
-                      : 'border-gray-300'
-                  }`}>
+                  <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center`}
+                    style={
+                      Array.isArray(currentAnswer) && currentAnswer.includes(option)
+                        ? { borderColor: '#35b4dd', background: '#35b4dd' }
+                        : { borderColor: '#d1d5db' }
+                    }
+                  >
                     {Array.isArray(currentAnswer) && currentAnswer.includes(option) && (
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -155,7 +186,12 @@ const QuizPage = () => {
         <div className="mb-8">
           <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
             <motion.div
-              className="bg-gradient-brand h-2 rounded-full"
+              className="h-2 rounded-full"
+              style={{
+                width: `${Math.max(33, progress)}%`,
+                background: 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)',
+                color: '#f5f5f7'
+              }}
               initial={{ width: '33%' }}
               animate={{ width: `${Math.max(33, progress)}%` }}
               transition={{ duration: 0.5 }}
@@ -182,28 +218,44 @@ const QuizPage = () => {
             {renderQuestion()}
 
             <div className="flex justify-between mt-8">
-              <button
+              <motion.button
+                type="button"
                 onClick={handlePrevious}
                 disabled={currentQuestionIndex === 0}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                style={{
+                  background: currentQuestionIndex === 0
+                    ? '#e5e7eb' // Tailwind gray-200
+                    : 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)',
+                  color: currentQuestionIndex === 0 ? '#9ca3af' : '#f5f5f7' // Tailwind gray-400 or white
+                }}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all transition-colors duration-300 ${
                   currentQuestionIndex === 0
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+                    ? 'cursor-not-allowed'
+                    : 'hover:shadow-lg'
                 }`}
+                whileHover={{ scale: currentQuestionIndex === 0 ? 1 : 1.02 }}
+                whileTap={{ scale: currentQuestionIndex === 0 ? 1 : 0.98 }}
               >
                 Previous
-              </button>
+              </motion.button>
 
               <motion.button
-                whileHover={{ scale: isAnswerValid() ? 1.02 : 1 }}
-                whileTap={{ scale: isAnswerValid() ? 0.98 : 1 }}
+                type="button"
                 onClick={handleNext}
                 disabled={!isAnswerValid()}
-                className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                style={{
+                  background: isAnswerValid()
+                    ? 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)'
+                    : '#d1d5db', // Tailwind gray-300
+                  color: isAnswerValid() ? '#f5f5f7' : '#6b7280' // Tailwind gray-500
+                }}
+                className={`px-8 py-3 rounded-lg font-semibold transition-all transition-colors duration-300 ${
                   isAnswerValid()
-                    ? 'bg-gradient-brand text-white hover:shadow-lg'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    ? 'hover:shadow-lg'
+                    : 'cursor-not-allowed'
                 }`}
+                whileHover={{ scale: isAnswerValid() ? 1.02 : 1 }}
+                whileTap={{ scale: isAnswerValid() ? 0.98 : 1 }}
               >
                 {isLastQuestion ? 'Generate My Custom Automation Report' : 'Next'}
               </motion.button>

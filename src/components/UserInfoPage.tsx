@@ -36,15 +36,27 @@ const UserInfoPage = () => {
       >
         <div className="mb-6">
           <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-            <div className="bg-gradient-brand h-2 rounded-full" style={{ width: '20%' }}></div>
+            <div
+              className="h-2 rounded-full"
+              style={{
+                width: '20%',
+                background: 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)',
+                color: '#f5f5f7'
+              }}
+            ></div>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Let's get started</h2>
-          <p className="text-gray-600">Tell us a bit about your business</p>
+          <h2
+          style={{ color: '#000323' }}
+          className="text-2xl font-bold mb-2">Let's get started</h2>
+          <p
+          style={{ color: '#000323' }}>Tell us a bit about your business</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="companyName" 
+            style={{ color: '#000323' }}
+            className="block text-sm font-medium mb-2">
               Company Name *
             </label>
             <input
@@ -60,7 +72,9 @@ const UserInfoPage = () => {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="email"
+            style={{ color: '#000323' }}
+            className="block text-sm font-medium mb-2">
               Email Address *
             </label>
             <input
@@ -79,15 +93,20 @@ const UserInfoPage = () => {
             type="submit"
             whileHover={{ scale: isFormValid ? 1.02 : 1 }}
             whileTap={{ scale: isFormValid ? 0.98 : 1 }}
+            style={
+              isFormValid
+                ? { background: 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)', color: '#f5f5f7' }
+                : {}
+            }
             disabled={!isFormValid}
             className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
               isFormValid
-                ? 'bg-gradient-brand text-white hover:shadow-lg'
+                ? 'hover:shadow-lg'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
-          >
-            Continue to Quiz
-          </motion.button>
+>
+  Continue to Quiz
+</motion.button>
         </form>
       </motion.div>
     </div>

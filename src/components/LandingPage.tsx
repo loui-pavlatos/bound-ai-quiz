@@ -9,7 +9,11 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-brand flex items-center justify-center px-4">
+    <div style={{
+      color: '#416aa0',
+      background: 'linear-gradient(135deg, #000323 0%, #35b4dd 100%)'
+     }}
+    className="min-h-screen flex items-center justify-center px-4">
       <div className="text-center text-white max-w-2xl">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -27,7 +31,8 @@ const LandingPage = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleStartQuiz}
-          className="bg-white text-brand-blue text-xl font-semibold px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform"
+          style={{ color: '#416aa0' }}
+          className="bg-white text-xl font-semibold px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform"
         >
           Start Quiz
         </motion.button>

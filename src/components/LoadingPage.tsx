@@ -15,7 +15,13 @@ const LoadingPage = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-brand flex items-center justify-center px-4">
+    <div
+      style={{
+        color: '#416aa0',
+        background: 'linear-gradient(135deg, #000323 0%, #35b4dd 100%)'
+      }}
+      className="min-h-screen flex items-center justify-center px-4"
+    >
       <div className="text-center text-white max-w-lg">
         <motion.div
           animate={{ rotate: 360 }}

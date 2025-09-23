@@ -4,14 +4,12 @@ export const quizQuestions: QuizQuestion[] = [
   {
     id: '1',
     type: 'multiple-choice',
-    question: 'What industry is your business in?',
+    question: 'What best describes you or your organization?',
     options: [
-      'Technology',
-      'Healthcare',
-      'Finance',
-      'Manufacturing',
-      'Retail',
-      'Education',
+      'MGA',
+      'Carrier',
+      'Agent/Broker',
+      'Technology Provider',
       'Other'
     ],
     required: true
@@ -19,64 +17,92 @@ export const quizQuestions: QuizQuestion[] = [
   {
     id: '2',
     type: 'multiple-choice',
-    question: 'How many employees does your company have?',
+    question: 'Do you specialize in any particular insurance lines?',
     options: [
-      '1-10',
-      '11-50',
-      '51-200',
-      '201-500',
-      '500+'
+      'Yes',
+      'No'
     ],
     required: true
   },
   {
     id: '3',
-    type: 'box-select',
-    question: 'Which business processes do you currently handle manually? (Select all that apply)',
+    type: 'multiple-choice',
+    question: 'What is your primary line of business?',
     options: [
-      'Customer service inquiries',
-      'Data entry and processing',
-      'Inventory management',
-      'Financial reporting',
-      'Marketing campaigns',
-      'HR processes',
-      'Quality control',
-      'Project management'
+      'Commercial General Liability and/or Property',
+      'Personal Property & Casualty',
+      'E&O/D&O',
+      'Health/Life',
+      'Workers Compensation',
+      'Specialty Lines',
+      'Other Lines'
     ],
     required: true
   },
   {
     id: '4',
     type: 'multiple-choice',
-    question: 'How much time per week does your team spend on repetitive tasks?',
+    question: 'How many documents does your company or team process on average each month?',
     options: [
-      'Less than 5 hours',
-      '5-15 hours',
-      '16-30 hours',
-      '31-40 hours',
-      'More than 40 hours'
+      '10,000+',
+      '5,000-10,000',
+      '2,500-5,000',
+      '1,000-2,500',
+      '500-1,000',
+      '100-500',
+      'Less than 100'
     ],
     required: true
   },
   {
     id: '5',
     type: 'multiple-choice',
-    question: 'What is your primary goal for automation?',
+    question: 'How would you describe your company or team’s current document quality?',
     options: [
-      'Reduce operational costs',
-      'Improve efficiency',
-      'Enhance customer experience',
-      'Scale business operations',
-      'Reduce human error',
-      'Free up time for strategic work'
+      'Standardized and high quality',
+      'Standardized but variable quality',
+      'Mix of standardized and unstandardized documents',
+      'Incomplete, inconsistent, or containing handwritten notes'
     ],
     required: true
   },
   {
     id: '6',
-    type: 'free-write',
-    question: 'Describe your biggest operational challenge that you think automation could help solve:',
-    placeholder: 'e.g., We spend too much time manually processing customer orders and managing inventory...',
+    type: 'multiple-choice',
+    question: 'What is your current document workflow?',
+    options: [
+      'Fully automated',
+      'Partially automated, with exceptions for specific tasks',
+      'Manual with some digital tools (e.g. email, shared drives)',
+      'Manual with minimal digital tools',
+      'Entirely manual (e.g. paper-based)'
+    ],
+    required: true
+  },
+  {
+    id: '7',
+    type: 'multiple-choice',
+    question: 'What capabilities best describe your current systems ability to connect with new software?',
+    options: [
+      'Systems have APIs and can easily integrate with new software',
+      'Systems require support from IT to integrate with new software',
+      'Systems are legacy and difficult to integrate with new software',
+      'Systems are legacy and no IT support is available',
+      'Unsure'
+    ],
+    required: true
+  },
+  {
+    id: '8',
+    type: 'box-select',
+    question: 'What are the significant operational challenge(s) your company or team is facing today?',
+    options: [
+      'Slow turnaround times',
+      'High error rates from manual data entry',
+      'Struggling to handle high volumes of documents',
+      'Skilled staff such as underwriters are spending too much time on clerical tasks',
+      'Reports and insights are hard to generate'
+    ],
     required: false
   }
 ];

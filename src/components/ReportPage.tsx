@@ -125,7 +125,11 @@ const ReportPage = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={downloadPDF}
-              className="bg-gradient-brand text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              style={{
+                background: 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)',
+                color: '#f5f5f7'
+              }}
+              className="px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Download PDF Report
             </motion.button>
@@ -147,7 +151,12 @@ const ReportPage = () => {
           transition={{ duration: 0.6 }}
           className="bg-white rounded-lg shadow-lg overflow-hidden"
         >
-          <div className="bg-gradient-brand text-white p-8 text-center">
+          <div
+            className="text-white p-8 text-center"
+            style={{
+              background: 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)'
+            }}
+          >
             <h2 className="text-3xl font-bold mb-2">
               Automation Potential for {reportData.userInfo.companyName}
             </h2>
@@ -177,13 +186,13 @@ const ReportPage = () => {
                       />
                       <defs>
                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#3B82F6" />
-                          <stop offset="100%" stopColor="#8B5CF6" />
+                          <stop offset="0%" stopColor="#416aa0" />
+                          <stop offset="100%" stopColor="#35b4dd" />
                         </linearGradient>
                       </defs>
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-3xl font-bold text-brand-blue">
+                      <span className="text-3xl font-bold" style={{ color: '#35b4dd' }}>
                         {reportData.automationPotential}%
                       </span>
                     </div>
@@ -194,7 +203,7 @@ const ReportPage = () => {
               <div className="text-center">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Estimated Time Savings</h3>
                 <div className="bg-blue-50 rounded-lg p-6">
-                  <div className="text-4xl font-bold text-brand-blue mb-2">
+                  <div className="text-4xl font-bold mb-2" style={{ color: '#35b4dd' }}>
                     {reportData.timeSavingsPerMonth}
                   </div>
                   <div className="text-lg text-gray-600">hours per month</div>
@@ -216,10 +225,14 @@ const ReportPage = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="bg-gray-50 rounded-lg p-4 border-l-4 border-brand-blue"
+                    className="bg-gray-50 rounded-lg p-4"
+                    style={{ borderLeft: '4px solid #35b4dd' }}
                   >
                     <div className="flex items-start">
-                      <div className="bg-brand-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1">
+                      <div
+                        className="rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1"
+                        style={{ background: '#35b4dd', color: '#fff' }}
+                      >
                         {index + 1}
                       </div>
                       <div>
@@ -242,14 +255,28 @@ const ReportPage = () => {
                 Ready to transform your business with automation? Contact our team to discuss how
                 Bound AI can help you achieve these time savings and efficiency gains.
               </p>
-              <div className="bg-gradient-brand text-white rounded-lg p-6">
+              <div
+                className="text-white rounded-lg p-6"
+                style={{
+                  background: 'linear-gradient(135deg, #416aa0 0%, #35b4dd 100%)'
+                }}
+              >
                 <h4 className="text-lg font-semibold mb-2">Get Started Today</h4>
                 <p className="mb-4">Schedule a free consultation with our automation experts</p>
                 <div className="space-y-2 text-sm">
-                  <p>📧 Contact: {reportData.userInfo.email}</p>
-                  <p>🏢 Company: {reportData.userInfo.companyName}</p>
-                  <p>📞 Call: +1 (555) 123-4567</p>
-                  <p>🌐 Visit: www.boundai.com</p>
+                  <p>📧 Your Contact Email: {reportData.userInfo.email}</p>
+                  <p>🏢 Your Company: {reportData.userInfo.companyName}</p>
+                  <p>🌐 Visit: {' '}
+                    <a
+                      href="https://www.boundai.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white underline-offset-2 hover:underline transition-all"
+                      style={{ color: '#fff' }}
+                    >
+                      www.boundai.ai
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
