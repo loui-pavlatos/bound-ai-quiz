@@ -87,7 +87,7 @@ export const calculateBoundAIProductApplicability = async (answers: QuizAnswer[]
             'Systems require support from IT to integrate with new software': 20,
             'Systems are legacy and difficult to integrate with new software': 10,
             'Systems are legacy and no IT support is available': 5,
-            'Unsure': 15
+            'Unsure': 10
           };
           score += systemScore[answer.answer] || 0;
         } break;
@@ -273,8 +273,8 @@ export const getProductRecommendations = (answers: QuizAnswer[], automationScore
   }
   //Respondant LOB type
   const processesAnswerLOB = answers.find(a => a.questionId === '3');
-  if (processesAnswerLOB &&
-    !processesAnswerLOB.answer.includes('Commercial General Liability and/or Property')
+  if ((processesAnswerLOB &&
+    processesAnswerLOB.answer.includes('Commercial General Liability and/or Property'))
     && automationScore >= 70) {
     recommendations.push('BoundAI SOV Processing Agent - Augment risk profiles, detect structural inconsistencies, and validate TIVs.',);
   }
