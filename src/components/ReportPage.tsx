@@ -158,7 +158,7 @@ const ReportPage = () => {
             }}
           >
             <h2 className="text-3xl font-bold mb-2">
-              Automation Potential for {reportData.userInfo.companyName}
+              Current Automation Score for {reportData.userInfo.companyName}
             </h2>
             <p className="text-lg opacity-90">Custom Business Automation Analysis</p>
           </div>
@@ -166,7 +166,7 @@ const ReportPage = () => {
           <div className="p-8">
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div className="text-center">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Automation Potential</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">Current Automation Readiness</h3>
                 <div className="relative">
                   <div className="w-32 h-32 mx-auto">
                     <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
