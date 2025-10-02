@@ -216,7 +216,7 @@ const ReportPage = () => {
 
             <div className="border-t pt-8">
               <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-                Recommended Bound AI Products
+                Recommended Products
               </h3>
               <div className="space-y-4">
                 {reportData.productRecommendations.map((product, index) => (
@@ -250,10 +250,27 @@ const ReportPage = () => {
             </div>
 
             <div className="border-t pt-8 mt-8 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Next Steps</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Next Steps to Improve Your Automation Readiness</h3>
               <p className="text-gray-600 mb-6">
-                Ready to transform your business with automation? Contact our team to discuss how
-                Bound AI can help you achieve these time savings and efficiency gains.
+                Explore our <a
+                      href="https://www.boundai.ai/blog-resources/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-gray-800 underline-offset-2 hover:underline transition-all"
+                    >
+                      blog
+                    </a> for more insights and resources on business automation.
+              </p>
+              <p className="text-gray-600 mb-6">
+                {' '}
+                <a
+                      href="https://www.boundai.ai/why-boundai/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-gray-800 underline-offset-2 hover:underline transition-all"
+                    >
+                      Why Bound AI?
+                    </a>
               </p>
               <div
                 className="text-white rounded-lg p-6"
@@ -262,7 +279,7 @@ const ReportPage = () => {
                 }}
               >
                 <h4 className="text-lg font-semibold mb-2">Get Started Today</h4>
-                <p className="mb-4">Schedule a free consultation with our automation experts</p>
+                <p className="mb-4">Schedule a demo with our automation experts</p>
                 <div className="space-y-2 text-sm">
                   <p>📧 Your Contact Email: {reportData.userInfo.email}</p>
                   <p>🏢 Your Company: {reportData.userInfo.companyName}</p>
